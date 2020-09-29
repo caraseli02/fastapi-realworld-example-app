@@ -9,6 +9,8 @@ from starlette.datastructures import CommaSeparatedStrings, Secret
 
 from app.core.logging import InterceptHandler
 
+import os
+
 API_PREFIX = "/api"
 
 JWT_TOKEN_PREFIX = "Token"  # noqa: S105
@@ -18,7 +20,7 @@ config = Config(".env")
 
 DEBUG: bool = config("DEBUG", cast=bool, default=False)
 
-DATABASE_URL: DatabaseURL = config("DB_CONNECTION", cast=DatabaseURL)
+DATABASE_URL: DatabaseURL = os.environ.get('DATABASE_URL')
 MAX_CONNECTIONS_COUNT: int = config("MAX_CONNECTIONS_COUNT", cast=int, default=10)
 MIN_CONNECTIONS_COUNT: int = config("MIN_CONNECTIONS_COUNT", cast=int, default=10)
 
